@@ -1,0 +1,550 @@
+/* ========================================================
+   ESTILOS GENERALES - GAMESCORE APP
+   Estilo básico y funcional sin sombras ni animaciones
+   ======================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333333;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+/* ========================================================
+   ENCABEZADO Y SECCIÓN DEL TIEMPO
+   ======================================================== */
+
+.header {
+    max-width: 1050px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    gap: 20px;
+}
+
+.header-info h1 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #666666;
+}
+
+/* Widget del tiempo */
+.weather-box {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 14px;
+    min-width: 240px;
+    position: relative;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.weather-city {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333333;
+}
+
+.weather-badge {
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #ced4da;
+}
+
+.weather-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weather-icon {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #e0e0e0;
+    background-color: #fafafa;
+}
+
+.weather-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-temp {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222222;
+    line-height: 1.1;
+}
+
+.weather-desc {
+    font-size: 12px;
+    color: #555555;
+    text-transform: capitalize;
+}
+
+.weather-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #555555;
+    margin-top: 6px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 6px;
+}
+
+.weather-config-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 6px;
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-radius: 4px;
+    padding: 12px;
+    z-index: 100;
+    width: 250px;
+}
+
+.weather-config-panel label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+    color: #333333;
+}
+
+.weather-config-panel input {
+    width: 100%;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+
+.config-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+/* ========================================================
+   CONTENEDOR Y ESTRUCTURA DE LA PÁGINA
+   ======================================================== */
+
+.container {
+    max-width: 1050px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 800px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* Tarjetas de contenido */
+.card {
+    background-color: #ffffff;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+}
+
+.card-header h2 {
+    font-size: 16px;
+    color: #333333;
+}
+
+.card-header h3 {
+    font-size: 15px;
+    color: #333333;
+}
+
+/* ========================================================
+   SECCIÓN POKÉMON DEL DÍA
+   ======================================================== */
+
+.pokemon-content {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.pokemon-image-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 10px auto;
+    background-color: #fafafa;
+    border: 1px solid #dddddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.pokemon-img {
+    width: 100px;
+    height: 100px;
+    image-rendering: pixelated;
+}
+
+.pokemon-loading {
+    position: absolute;
+    font-size: 12px;
+    color: #777777;
+}
+
+.pokemon-name {
+    font-size: 18px;
+    color: #222222;
+    text-transform: capitalize;
+    margin-bottom: 4px;
+}
+
+.pokemon-info {
+    font-size: 13px;
+    color: #555555;
+    margin-bottom: 4px;
+}
+
+.pokemon-type {
+    font-size: 13px;
+    color: #555555;
+    margin-bottom: 12px;
+}
+
+/* Resumen del proyecto */
+.summary-text {
+    font-size: 13px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+
+.info-list {
+    padding-left: 20px;
+    font-size: 13px;
+    color: #555555;
+}
+
+.info-list li {
+    margin-bottom: 4px;
+}
+
+/* ========================================================
+   ESTADO DEL SERVIDOR (ALERTAS)
+   ======================================================== */
+
+.status-alert {
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border: 1px solid #cccccc;
+}
+
+.status-alert.connecting {
+    background-color: #fff3cd;
+    border-color: #ffe69c;
+    color: #664d03;
+}
+
+.status-alert.connected {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+    color: #0f5132;
+}
+
+.status-alert.error {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+}
+
+/* ========================================================
+   FORMULARIO: CAMPOS Y ENTRADAS BÁSICAS
+   ======================================================== */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 4px;
+}
+
+.form-group input {
+    padding: 6px 8px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: inherit;
+    background-color: #ffffff;
+    color: #333333;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #0d6efd;
+}
+
+/* ========================================================
+   BOTONES BÁSICOS
+   ======================================================== */
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: 1px solid #0d6efd;
+    padding: 7px 14px;
+    font-size: 13px;
+    border-radius: 3px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+.btn-secondary {
+    background-color: #f8f9fa;
+    color: #333333;
+    border: 1px solid #cccccc;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e6ea;
+}
+
+.btn-refresh {
+    background-color: #6c757d;
+    color: #ffffff;
+    border: 1px solid #6c757d;
+    padding: 7px 12px;
+    font-size: 13px;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.btn-refresh:hover {
+    background-color: #5c636a;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: 1px solid #dc3545;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.btn-delete:hover {
+    background-color: #bb2d3b;
+}
+
+.btn-small {
+    background-color: #f8f9fa;
+    border: 1px solid #cccccc;
+    padding: 2px 6px;
+    font-size: 11px;
+    border-radius: 3px;
+    color: #333333;
+}
+
+.btn-small:hover {
+    background-color: #e2e6ea;
+}
+
+.btn-primary-small {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: 1px solid #0d6efd;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.btn-primary-small:hover {
+    background-color: #0b5ed7;
+}
+
+.btn-secondary-small {
+    background-color: #f8f9fa;
+    color: #333333;
+    border: 1px solid #cccccc;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.btn-secondary-small:hover {
+    background-color: #e2e6ea;
+}
+
+.btn-retry {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: 1px solid #dc3545;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.btn-retry:hover {
+    background-color: #bb2d3b;
+}
+
+/* Mensajes de feedback del formulario */
+.feedback-msg {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+}
+
+.feedback-msg.success {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+    color: #0f5132;
+}
+
+.feedback-msg.error {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+}
+
+/* ========================================================
+   TABLA DE PUNTUACIONES
+   ======================================================== */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.score-table th,
+.score-table td {
+    padding: 8px 10px;
+    border: 1px solid #dddddd;
+    text-align: left;
+}
+
+.score-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333333;
+}
+
+.score-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.score-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+/* ========================================================
+   PIE DE PÁGINA Y CLASES AUXILIARES
+   ======================================================== */
+
+.footer {
+    max-width: 1050px;
+    margin: 20px auto 0 auto;
+    text-align: center;
+    font-size: 12px;
+    color: #777777;
+    padding: 10px;
+}
+
+.hidden {
+    display: none !important;
+}

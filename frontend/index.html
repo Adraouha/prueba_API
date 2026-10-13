@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameScore - Registro de Puntuaciones</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Encabezado con título e información del tiempo -->
+    <header class="header">
+        <div class="header-info">
+            <h1>GameScore</h1>
+            <p class="subtitle">Sistema de registro de puntuaciones y consulta de servicios web</p>
+        </div>
+
+        <!-- Información del tiempo en la esquina superior derecha -->
+        <div id="weather-widget" class="weather-box">
+            <div class="weather-header">
+                <span class="weather-city" id="weather-city">Barcelona</span>
+                <span class="weather-badge" id="weather-badge">El Tiempo</span>
+            </div>
+            <div class="weather-body">
+                <img id="weather-icon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="Icono del tiempo" class="weather-icon">
+                <div class="weather-data">
+                    <span id="weather-temp" class="weather-temp">--°C</span>
+                    <span id="weather-desc" class="weather-desc">Cargando tiempo...</span>
+                </div>
+            </div>
+            <div class="weather-footer">
+                <span>Humedad: <strong id="weather-humidity">--%</strong></span>
+                <button type="button" id="btn-config-weather" class="btn-small">Configurar</button>
+            </div>
+            
+            <!-- Panel de configuración de ciudad -->
+            <div id="weather-config-panel" class="weather-config-panel hidden">
+                <label for="input-weather-city">Ciudad:</label>
+                <input type="text" id="input-weather-city" placeholder="Ciudad (ej. Barcelona)" value="Barcelona">
+                <label for="input-weather-key">API Key (opcional):</label>
+                <input type="text" id="input-weather-key" placeholder="API Key OpenWeather">
+                <div class="config-actions">
+                    <button type="button" id="btn-save-weather" class="btn-primary-small">Guardar</button>
+                    <button type="button" id="btn-close-weather" class="btn-secondary-small">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Columna lateral: Pokémon del día e Información -->
+        <aside class="sidebar">
+            <div class="card pokemon-card">
+                <div class="card-header">
+                    <h2>Pokémon del día</h2>
+                </div>
+                <div class="pokemon-content">
+                    <div class="pokemon-image-container">
+                        <img id="pokemon-img" src="" alt="Pokémon del día" class="pokemon-img">
+                        <div id="pokemon-loading" class="pokemon-loading">Cargando...</div>
+                    </div>
+                    <h3 id="pokemon-name" class="pokemon-name">---</h3>
+                    <p id="pokemon-info" class="pokemon-info">Número: ---</p>
+                    <p id="pokemon-type" class="pokemon-type">Tipo: ---</p>
+                    <button type="button" id="btn-random-pokemon" class="btn-refresh">Cargar otro Pokémon</button>
+                </div>
+            </div>
+
+            <!-- Información del proyecto -->
+            <div class="card summary-card">
+                <h3>Información del proyecto</h3>
+                <p class="summary-text">Esta aplicación web integra datos de servicios externos y permite registrar puntuaciones de jugadores en una base de datos MySQL.</p>
+                <ul class="info-list">
+                    <li>Servicio meteorológico (OpenWeatherMap)</li>
+                    <li>Consulta de Pokémon (PokeAPI)</li>
+                    <li>API REST en Spring Boot</li>
+                    <li>Base de datos MySQL</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Columna principal: Formulario y Tabla de puntuaciones -->
+        <main class="main-content">
+            
+            <!-- Estado de conexión del servidor -->
+            <div id="backend-status" class="status-alert connecting">
+                <span id="backend-status-text">Conectando con el servidor en el puerto 8082...</span>
+                <button type="button" id="btn-retry-backend" class="btn-retry hidden">Reintentar conexión</button>
+            </div>
+
+            <!-- Formulario: Registrar nueva puntuación -->
+            <section class="card form-card">
+                <div class="card-header">
+                    <h2>Añadir nueva puntuación</h2>
+                </div>
+
+                <form id="form-puntuacion" class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre-jugador">Nombre del jugador:</label>
+                        <input type="text" id="nombre-jugador" list="jugadores-list" placeholder="Nombre del jugador" required>
+                        <datalist id="jugadores-list">
+                            <!-- Opciones cargadas dinámicamente -->
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="puntos-jugador">Puntuación:</label>
+                        <input type="number" id="puntos-jugador" min="0" max="999999" placeholder="Puntos conseguidos" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha-puntuacion">Fecha:</label>
+                        <input type="date" id="fecha-puntuacion" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="btn-guardar" class="btn-primary">Guardar puntuación</button>
+                    </div>
+                </form>
+
+                <div id="form-feedback" class="feedback-msg hidden"></div>
+            </section>
+
+            <!-- Tabla: Puntuaciones registradas -->
+            <section class="card table-card">
+                <div class="card-header">
+                    <h2>Puntuaciones registradas</h2>
+                    <div class="header-right">
+                        <button type="button" id="btn-recargar-tabla" class="btn-secondary">Actualizar lista</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="score-table">
+                        <thead>
+                            <tr>
+                                <th>N.º</th>
+                                <th>Jugador</th>
+                                <th>Puntos</th>
+                                <th>Fecha</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-puntuaciones-body">
+                            <tr>
+                                <td colspan="5" class="text-center">Cargando puntuaciones...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <p>GameScore - Aplicación de Registro de Puntuaciones &copy; 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
